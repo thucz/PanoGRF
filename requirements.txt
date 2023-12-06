@@ -1,0 +1,31 @@
+# for renderer training
+tensorflow>=2.0
+easydict
+inplace-abn
+plyfile
+numpy
+scikit-image
+pyyaml
+h5py
+opencv-python
+tqdm
+matplotlib
+scipy
+lpips
+transforms3d
+tensorboard==2.8.0
+tensorboardX
+
+
+# for habitat
+protobuf==3.20.1
+proglog
+decorator
+msgpack
+simplejson
+click 
+distro 
+progress
+billiard
+einops
+kornia

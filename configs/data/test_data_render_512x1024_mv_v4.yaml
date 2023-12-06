@@ -1,0 +1,22 @@
+seq_len: 13 #4+9/8+9 #w/o outbound
+
+total_cnt: 10 #20000
+mode: "test"
+reference_idx: 4
+
+m3d_dist: 0.5 #
+
+width: 1024 #1024 #2048 #512
+height: 512 #512 #1024 #256
+
+aug: False
+num_workers: 0
+batch_size: 1
+
+dataset: "m3d"
+save_dir: "/group/30042/ozhengchen/lmdb"
+
+
+# test_sample_num: 1000
+# script_mode: "train_depth_pose"
+# dataset: "m3d"

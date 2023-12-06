@@ -1,0 +1,79 @@
+#for debug:
+checkpoints_dir: "../logs_depth/m3d_mvs"
+DNET_ckpt: /group/30042/ozhengchen/ft_local/logs_depth/m3d_mono/checkpoint_100000.pt
+test_sample_num: 1000 #
+total_iter: 100000
+train_tensorboard_interval: 1000
+validation_interval: 50000
+checkpoint_interval: 50000
+
+mono_height: 512
+mono_width: 1024
+debug: False
+num_workers: 2
+load_weights_dir: UniFuse-Unidirectional-Fusion/UniFuse
+load_from_pretrained: True
+contain_dnet: true
+use_depth_sampling: True
+aug: True
+mono_uncertainty: false
+fixed_sigma: 0.5
+sphere: true
+
+mono_num_layers: 18
+mono_net: "UniFuse"
+mono_fusion: "cee"
+
+
+MAGNET_num_samples: 5
+use_wrap_padding: true
+
+num_layers: 18
+net: "Equi"
+fusion: "biproj"
+se_in_fusion: false
+fov: 80
+nrows: 4
+min_depth: 0.1
+max_depth: 10
+dataset_name: "m3d"
+
+
+
+script_mode: "train_depth_pose" #
+m3d_dist: 1.0
+reference_idx: 1
+seq_len: 2
+
+# script_mode: "eval_depth_test" #
+# eval_mode: test
+# m3d_dist: 1.0
+# reference_idx: 1
+# seq_len: 2
+# test_sample_num: 1000
+
+
+model_name: "''"
+
+imagenet_pretrained: false
+out_type: "depth"
+model_use_v_input: False
+batch_size: 2
+epochs: 9999999
+learning_rate: 0.0001
+width: 512
+height: 256
+opt_beta1: 0.9
+opt_beta2: 0.999
+checkpoint_count: 3
+device: "cuda"
+verbose: True
+depth_input_uv: True
+normalize_depth: False
+predict_zdepth: False
+interpolation_mode: "bilinear"
+clip_grad_value: 1.0
+cost_volume: "v3_erp"
+loss: "l1_cost_volume_erp"
+dataset: "m3d"
+turbo_cmap_min: 0.3

@@ -1,0 +1,86 @@
+# UniFuse (monocular depth) pretrained model checkpoint 
+load_weights_dir: UniFuse-Unidirectional-Fusion/UniFuse
+
+# training options(1000 for debug)
+validation_interval: 50000
+checkpoint_interval: 50000
+total_iter: 100000
+test_sample_num: 1000 # testing 1000 samples
+
+# As monocular model is pretrained in 512x1024, we scale the input to that resolution.
+mono_height: 512
+mono_width: 1024
+
+# options for monocular depth
+load_from_pretrained: True
+use_wrap_padding: true
+
+# finetuning on habitat matterport3d dataset, saving directory:
+checkpoints_dir: ../logs_depth/m3d_mono
+
+# using augmentation
+aug: True
+num_workers: 0
+
+train_tensorboard_interval: 20
+median_scaling: False
+
+# consistent min & max depth with UniFuse.
+min_depth: 0.1
+max_depth: 10
+
+dataset: m3d
+# Indeed, the initial input is 512x256, consistent with 360-degree MVSNet. Later, we scale it to 512x1024 to feed into UniFuse.
+width: 512
+height: 256
+
+# option of UniFuse
+mono_net: "UniFuse"
+mono_num_layers: 18
+fusion: "cee"
+se_in_fusion: false
+
+
+# training mode
+script_mode:  train_depth_pose # indeed gt pose is given
+val_seq_len: 2 
+m3d_dist: 1.0
+reference_idx: 1
+eval_mode: test
+
+# testing mode
+#script_mode:  eval_depth_test
+#val_seq_len: 2
+#m3d_dist: 1.0
+#reference_idx: 1
+#eval_mode: test
+#test_sample_num: 1000
+
+model_name: "''"
+
+
+batch_size: 2
+epochs: 9999999
+
+# other training options
+learning-rate: 0.0001
+opt_beta1: 0.9
+opt_beta2: 0.999
+checkpoint_count: 3
+point_radius: 0.01
+device: cuda
+verbose: true
+depth_input_uv: True
+normalize_depth: False
+predict_zdepth: False
+interpolation_mode: bilinear
+smoothness_loss_lambda: 0
+rot_loss_lambda: 0
+trans_loss_lambda: 0
+depth_range_loss_lambda: 0
+clip_grad_value: 1.0
+cost_volume: v3_erp
+loss: l1_cost_volume_erp
+model_use_v_input: True
+turbo_cmap_min: 0.3
+
