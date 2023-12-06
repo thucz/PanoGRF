@@ -4,6 +4,16 @@ This is the code release for our NeurIPS2023 paper, PanoGRF: Generalizable Spher
 
 ## [Project Page](https://thucz.github.io/PanoGRF/)|[Arxiv](https://arxiv.org/abs/2306.01531)
 
+## Citation
+If you find our work useful, please cite:
+```
+@article{chen2023panogrf,
+  title={PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas},
+  author={Chen, Zheng and Cao, Yan-Pei and Guo, Yuan-Chen and Wang, Chen and Shan, Ying and Zhang, Song-Hai},
+  journal={arXiv preprint arXiv:2306.01531},
+  year={2023}
+}
+```
 ## Dataset
 We download Matterport3D following [SynSin](https://github.com/facebookresearch/synsin/blob/main/MP3D.md).
 
@@ -76,14 +86,5 @@ Within this repository, I have utilized code and datasets from various sources. 
 
 
 
-## Citation
 
-```
-@article{chen2023panogrf,
-  title={PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas},
-  author={Chen, Zheng and Cao, Yan-Pei and Guo, Yuan-Chen and Wang, Chen and Shan, Ying and Zhang, Song-Hai},
-  journal={arXiv preprint arXiv:2306.01531},
-  year={2023}
-}
-```
 
