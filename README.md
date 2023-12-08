@@ -1,4 +1,4 @@
-# PanoGRF (Under Construction)
+# PanoGRF
 
 This is the code release for our NeurIPS2023 paper, PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas
 
