@@ -5,7 +5,7 @@ This is the code release for our NeurIPS2023 paper, PanoGRF: Generalizable Spher
 ## [Project Page](https://thucz.github.io/PanoGRF/)|[Arxiv](https://arxiv.org/abs/2306.01531)
 
 ## Citation
-If you find our work useful, please star this repo and cite this paper:
+If you find our work useful, please give us a star and cite this paper:
 ```
 @article{chen2023panogrf,
   title={PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas},
