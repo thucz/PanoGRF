@@ -14,13 +14,12 @@ If you find this repo useful, please give me a star and cite this paper:
   year={2023}
 }
 ```
-## Dataset
-We download Matterport3D following [SynSin](https://github.com/facebookresearch/synsin/blob/main/MP3D.md).
 
 ## Environment
 Refer to [installation guidance](.docs/install.md)
 
-## Depth Training
+## Dataset
+We download Matterport3D following [SynSin](https://github.com/facebookresearch/synsin/blob/main/MP3D.md).
 
 You should change the name of all the saving directories in the config files according to your directories.
 
@@ -44,6 +43,7 @@ The data for `opts.scene_dir` is organized as:
             |-- ...
     |-- ...
 ```
+## Depth Training
 ### Monocular depth finetuning:
 Download the pretrained model on Matterport3D from [UniFuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) and put it under the directory `./UniFuse-Unidirectional-Fusion/UniFuse`.
 
