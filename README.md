@@ -24,7 +24,12 @@ Refer to [installation guidance](.docs/install.md)
 
 You should change the name of all the saving directories in the config files according to your directories.
 
-You should also revise the data directory `opts.scenes_dir` according to your download directory which stored `mp3d` in the following files.
+You should also revise the data directory `opts.scenes_dir` according to your download directory which stored `mp3d` in the following files:
+```
+data_readers/habitat_data_neuray_ft.py
+data_readers/habitat_data_neuray.py
+```
+
 
 The data for `opts.scene_dir` is organized as:
 ```
@@ -38,11 +43,6 @@ The data for `opts.scene_dir` is organized as:
     |-- 1pXnuDYAj8r
             |-- ...
     |-- ...
-```
-```
-data_readers/habitat_data_neuray_ft.py
-
-data_readers/habitat_data_neuray.py
 ```
 ### Monocular depth finetuning:
 Download the pretrained model on Matterport3D from [UniFuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) and put it under the directory `./UniFuse-Unidirectional-Fusion/UniFuse`.
