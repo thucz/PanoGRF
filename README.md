@@ -26,6 +26,19 @@ You should change the name of all the saving directories in the config files acc
 
 You should also revise the data directory `opts.scenes_dir` according to your download directory which stored `mp3d` in the following files.
 
+The data for `opts.scene_dir` is organized as:
+```
+<opts.scene_dir>
+|-- mp3d 
+    |-- 1LXtFkjw3qL # scene_name
+            |-- 1LXtFkjw3qL_semantics.ply
+            |-- 1LXtFkjw3qL.glb
+            |-- 1LXtFkjw3qL.house
+            |-- 1LXtFkjw3qL.navmesh            
+    |-- 1pXnuDYAj8r
+            |-- ...
+    |-- ...
+```
 ```
 data_readers/habitat_data_neuray_ft.py
 
