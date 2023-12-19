@@ -18,7 +18,7 @@ If you find this repo useful, please give me a star and cite this paper:
 We download Matterport3D following [SynSin](https://github.com/facebookresearch/synsin/blob/main/MP3D.md).
 
 ## Environment
-Refer to [installation guidance](./install.md)
+Refer to [installation guidance](.docs/install.md)
 
 ## Depth Training
 
