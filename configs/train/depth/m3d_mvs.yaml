@@ -1,7 +1,11 @@
-#for debug:
-checkpoints_dir: "/group/30042/ozhengchen/ft_local/runs/run_m3d_erp_uniform_mono_stereo_wo_uncertainty_n5/" #checkpoint_100000.pt"
 
-DNET_ckpt: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/checkpoint_100000.pt
+# train MVS with monocular depth prior
+
+# 360-MVS model saving directory:
+checkpoints_dir: "/group/30042/ozhengchen/my_projects/logs/mvsdepth/" #checkpoint_100000.pt"
+
+# 360 monocular depth model path:
+DNET_ckpt: /group/30042/ozhengchen/my_projects/logs/monodepth/checkpoint_100000.pt
 
 test_sample_num: 1000 #
 total_iter: 100000

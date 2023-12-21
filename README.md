@@ -44,20 +44,20 @@ The data for `opts.scene_dir` is organized as:
     |-- ...
 ```
 ## pretrained model
-The pretrained model of 360-degree Monocular Net, 360-degree MVSNet and general renderer(two-views trained under 1.0m camera baseline) can be found in [GoogleDrive](https://drive.google.com/drive/folders/14RTKIsmQVuBc-b_z8f2iCb0cjc6UdVBN?usp=sharing)
+The pretrained models of 360-degree Monocular Net, 360-degree MVSNet and general renderer(two-views trained under 1.0m camera baseline) can be found in [GoogleDrive](https://drive.google.com/drive/folders/14RTKIsmQVuBc-b_z8f2iCb0cjc6UdVBN?usp=sharing)
 
 ## Depth Training
 ### Monocular depth finetuning:
-Download the pretrained model on Matterport3D from [UniFuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) and put it under the directory `./UniFuse-Unidirectional-Fusion/UniFuse`.
+Download the pretrained model on Matterport3D from [UniFuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) and put it under the directory `load_weights_dir` in config file `configs/train/depth/m3d_mono.yaml`.
 
 Training the monocular depth network as follows:
 ```
-bash train_depth_scripts/train_monodepth.sh
+bash train_scripts/train_depth/train_monodepth.sh
 ```
-
-### Multi-view stereo network training:
+### Multi-view stereo network training with monocular depth prior:
+set `DNET_ckpt` in `configs/train/depth/m3d_mono.yaml` to the path of monocular depth model in last step. 
 ```
-bash train_depth_scripts/train_mvs.sh
+bash train_scripts/train_depth/train_mvs.sh
 ```
 ## General renderer training:
 The speed of rendering training data (textured mesh) online with habitat is tolerable in depth training.

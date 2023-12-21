@@ -5,12 +5,10 @@ import cv2
 import os
 import distro
 import numpy as np
-# Pytorch Imports
 import torch
 from progress.bar import Bar
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
-
 from data_readers.habitat_data_neuray_ft import HabitatImageGeneratorFT
 from lmdb_rw.habitat_data_neuray_ft_lmdb import HabitatImageGeneratorFT_LMDB
 from helpers import my_torch_helpers
@@ -20,11 +18,8 @@ from network.omni_mvsnet.pipeline3_model import FullPipeline
 import numpy as np
 import random
 import argparse
-
 from utils.base_utils import load_cfg
-from seed import setup_seed, seed_everything
-
-    
+from utils.seed import setup_seed, seed_everything
 class App:
   """Main app class"""
   default_cfg={
@@ -77,16 +72,14 @@ class App:
     "test_sample_num": 200,
     "save_datadir": "/home/chenzheng/nas/PanoNVS/somsi_data/test_m3d",
     "total_iter": 100000,
-    #unifuse
+    # unifuse
     "num_layers": 18, # choices=[2, 18, 34, 50, 101]
     "imagenet_pretrained": False,
-    # ablation settings
     "mono_net": "UniFuse",#choices=["UniFuse", "Equi", "ERP+TP", "TP", "Cube", "OmniSyn"]
     "fusion":"cee", #choices=["cee", "cat", "biproj"]
     "se_in_fusion": False,
     "num_workers": 2,
     # Multi_view matching hyper_parameters
-
     "MAGNET_sampling_range": 3,
     "MAGNET_num_samples": 5,
     "MAGNET_mvs_weighting": "CW5",
@@ -95,10 +88,10 @@ class App:
     "use_wrap_padding": False,
     "stereo_out_type": "disparity",
     "dnet_out_type": "depth",
-    #fusemodel output type
+    # fusemodel output type
     "out_type": "depth",
     "stereonet_ckpt": None,
-    "fuse_type": "simple", #simple, geometry_emb_only, geometry_emb_scaled, geometry_emb_scaled_masked etc
+    "fuse_type": "simple", 
     "patchsize": (128, 128),
     "fov": 80,
     "nrow": 4,#3,4,5,6
@@ -169,7 +162,6 @@ class App:
         with open(args["checkpoints_dir"]+"/params.txt", "w") as fp:
           fp.write("params:"+str(total_params))
         self.run_training_loop()
-        # args["checkpoints_dir"]
       elif args["script_mode"] == "eval_depth_pose":
         total_params = self.model.get_total_params()
         print("Total parameters:", total_params)
@@ -206,27 +198,11 @@ class App:
                          use_v_input=args["model_use_v_input"],
                          ).to(args["device"])
     if args["uncert_tune"]:
-      # load_mvs_model(self.mvs_net, args["mvs_checkpoints_dir"])
-    
-      # for param in self.mvs_net.parameters():
-      #   param.requires_grad = False
-      # self.mvs_net.eval()
       from network.omni_mvsnet.uncert_wrapper import UncertWrapper
-      model = UncertWrapper(args, model)
-    
+      model = UncertWrapper(args, model)    
     if args["std_uncert_tune"]:
-      # load_mvs_model(self.mvs_net, args["mvs_checkpoints_dir"])
-    
-      # for param in self.mvs_net.parameters():
-      #   param.requires_grad = False
-      # self.mvs_net.eval()
       from network.omni_mvsnet.std_uncert_wrapper import StdUncertWrapper
       model = StdUncertWrapper(args, model)
-    
-    
-    # else:
-    #   # net = Uncertainty_Wrapper(args, model, )
-
 
     optimizer = torch.optim.Adam(model.parameters(),
                                  lr=args["learning_rate"],
@@ -244,7 +220,6 @@ class App:
                                            max_to_keep=args["checkpoint_count"])
                                           
     latest_checkpoint = checkpoint_manager.load_latest_checkpoint()
-    # import ipdb;ipdb.set_trace()
     if latest_checkpoint is not None:
       model.load_state_dict(latest_checkpoint['model_state_dict'])
       optimizer.load_state_dict(latest_checkpoint['optimizer_state_dict'])
@@ -261,16 +236,7 @@ class App:
     """Loads training data."""
     args = self.args
 
-    # Prepare dataset loaders for train and validation datasets.
     if args["dataset"] == "m3d":
-        #       args=cfg,
-        # split=mode,
-        # seq_len=seq_len,
-        # reference_idx=reference_idx,
-        # full_width=full_width,
-        # full_height=full_height,
-        # m3d_dist=m3d_dist
-      
       if args["use_lmdb"]:
         train_data = HabitatImageGeneratorFT_LMDB(
           args,
@@ -322,7 +288,7 @@ class App:
     args = self.args
 
     if args["dataset"] == "m3d":
-      if args["use_lmdb"]: #  == "eval_depth_test":
+      if args["use_lmdb"]: 
         val_data = HabitatImageGeneratorFT_LMDB(
           args,
           "val",
@@ -344,46 +310,10 @@ class App:
           full_width=self.full_width,
           full_height=self.full_height,
           m3d_dist=args["m3d_dist"])
-
-    # Load a single batch of validation data.
-    # # val_data_indices = [20, 40, 60, 80, 100]
-    # val_data_indices = [0, 40, 80, 120]
-    # val_data_all = tuple(val_data[i] for i in val_data_indices)
-    # input_panos_val = np.stack(tuple(
-    #   v_data["rgb_panos"] for v_data in val_data_all),
-    #   axis=0)
-    # input_panos_val = torch.tensor(input_panos_val,
-    #                                dtype=torch.float32,
-    #                                device=args["device"])
-    # input_depths_val = np.stack(tuple(
-    #   v_data["depth_panos"] for v_data in val_data_all),
-    #   axis=0)
-    # input_depths_val = torch.tensor(input_depths_val,
-    #                                 dtype=torch.float32,
-    #                                 device=args["device"])
-    # input_rots_val = np.stack(
-    #   tuple(v_data["rots"] for v_data in val_data_all),
-    #   axis=0)
-    # input_rots_val = torch.tensor(input_rots_val,
-    #                               dtype=torch.float32,
-    #                               device=args["device"])
-    # input_trans_val = np.stack(tuple(
-    #   v_data["trans"] for v_data in val_data_all),
-    #   axis=0)
-    # input_trans_val = torch.tensor(input_trans_val,
-    #                                dtype=torch.float32,
-    #                                device=args["device"])
-
     self.val_data = val_data
-    # self.val_data_indices = val_data_indices
-    # self.input_panos_val = input_panos_val
-    # self.input_depths_val = input_depths_val
-    # self.input_rots_val = input_rots_val
-    # self.input_trans_val = input_trans_val
 
   def run_depth_pose_carla(self, step, panos, depths, rots, trans):
     """Does a single run and returns results.
-
     Args:
       step: Current step.
       panos: Input panoramas.
@@ -415,63 +345,13 @@ class App:
       depths_small, (args["height"], args["width"]), mode=args["interpolation_mode"])
     depths_small = depths_small.reshape(batch_size, seq_len, height, width, 1)
 
-    # rots_pred, trans_pred = model.estimate_pose(panos_small[:, :2, :, :, :])
-    # if args["cost_volume"]:
     outputs = model.estimate_depth_using_cost_volume(panos_small, rots, trans,
                                                       min_depth=args["min_depth"],
                                                       max_depth=args["max_depth"])
     depths_pred = outputs["depth"]
-
-    # rgb_ = np.uint8(panos[0, 1].data.cpu().numpy()*255)
-    # depth_ = depths_pred[0, 0]
-    # # for only depth debug
-    # import cv2
-    # os.makedirs("./erp_debug", exist_ok=True)
-    # cv2.imwrite("./erp_debug/rgb.jpg", rgb_)
-    # # def depth_norm(depth_np):
-    # #   d_min = depth_np.min()
-    # #   d_max = depth_np.max()
-    # #   d_norm = (depth_np-d_min)/(d_max-d_min)
-    # #   d_gray = np.uint8(d_norm*255)
-    # #   d_rgb = cv2.applyColorMap(d_gray, cv2.COLORMAP_JET)
-    # #   return d_rgb    
-    # def normalize_depth(depth):
-    #   d_min = depth.min()
-    #   d_max = depth.max()
-    #   d_norm = np.uint8((depth-d_min)/(d_max-d_min)*255)
-    #   d_rgb = cv2.applyColorMap(d_norm, cv2.COLORMAP_JET)
-    #   return d_rgb
-    # d_rgb = normalize_depth(depth_.data.cpu().numpy())
-    # cv2.imwrite("./erp_debug/d_rgb.jpg", d_rgb)
-
-
-    # if args["predict_zdepth"]:
-    #   depths_pred = train_data.zdepth_to_distance_torch(depths_pred)
     depths_pred = depths_pred.reshape(
       (batch_size, 1, height, width, depths_pred.shape[3]))     
     assert torch.isfinite(depths_pred).all(), "Nan in depths_pred"
-    
-    # disp_c1 = None
-    # depths_c1 = None
-    # zdepths_small_1 = None
-    # rect_gt_depth = None
-    # rect_gt_disp = None
-    # disp_pred_c1 = None
-    # if args["cost_volume"] == "v1" or \
-    #     args["cost_volume"] == "v2" or \
-    #     args["cost_volume"] == "v3":
-      
-    #   rect_gt_depth = my_torch_helpers.rotate_equirectangular_image(
-    #     depths_small[:, 1], outputs["rect_rots"][:, 1])
-      
-    #   # rect_gt_disp = model.erp_depth_to_disparity(
-    #   #   rect_gt_depth.permute((0, 3, 1, 2)), outputs["trans_norm"])
-    #   # rect_gt_disp = rect_gt_disp.permute((0, 2, 3, 1))
-    #   # unrect_gt_disp = model.unrectify_image(rect_gt_disp,
-    #   #                                        outputs["rect_rots"][:, 1])
-    #   # assert torch.isfinite(rect_gt_disp).all(), "Nan in rect_gt_disp"
-    #   assert torch.isfinite(
-    #     outputs["raw_image_features"]).all(), "Nan in raw image features"
     
     
     if args["loss"] == "l1_cost_volume_erp":
@@ -479,21 +359,17 @@ class App:
       one_over_gt_depth = my_torch_helpers.safe_divide(1.0, depths_small[:, 1]) #todo     
       if args["std_uncert_tune"]:
         gt_dmap = depths_small[:, 1].reshape(batch_size, 1, height, width).clone()
-        # gt_dmap[gt_dmap > args["max_depth"]+1] = args["max_depth"] + 1
         pred = outputs["depth"].permute(((0, 3, 1, 2)))
         sigma_pred = outputs["mvs_std"]
-        # depths_pred, gt_dmap, sigma_pred, torch.gt(gt_dmap, 0.1)
         depth_loss = loss_lib.new_compute_gaussian_loss(
           pred,
           gt_dmap,
           sigma_pred,
           torch.gt(gt_dmap, 0.1)
-        )
-      
+        )      
         loss1 = depth_loss
       elif args["mvs_uncertainty"] or args["uncert_tune"]:
         gt_dmap = depths_small[:, 1].reshape(batch_size, 1, height, width).clone()
-        # gt_dmap[gt_dmap > args["max_depth"]+1] = args["max_depth"] + 1
         pred = outputs["pred_final"]
         if "new_uncert_tune" in self.cfg and self.cfg["new_uncert_tune"]:
           depth_loss = loss_lib.new_loss_uncertainty(
@@ -501,8 +377,7 @@ class App:
             gt_dmap,
             torch.gt(gt_dmap, 0.1)
           )
-          # import ipdb;ipdb.set_trace()
-
+       
         else:
           depth_loss = loss_lib.loss_uncertainty(
             pred,
@@ -510,30 +385,7 @@ class App:
             torch.gt(gt_dmap, 0.1),
             sphere=args["sphere"]
           )
-        
-        #visualize gt_dmap
-
-
         depths_pred = torch.clamp(pred[:, :1, ...], min=0.1).unsqueeze(4)
-
-        # if args["out_type"]=="disparity":
-        #   # loss1 = loss_lib.compute_l1_sphere_loss(
-        #   #   outputs['raw_image_features'],
-        #   #   one_over_gt_depth,
-        #   #   mask=torch.gt(depths_small[:, 1], 0.1))
-        #   loss1 = depth_loss + 0.5 * loss_lib.compute_l1_sphere_loss(
-        #     outputs['raw_image_features_d1'],
-        #     one_over_gt_depth,
-        #     mask=torch.gt(depths_small[:, 1], 0.1))
-        # elif args["out_type"]=="depth":
-        #   # loss1 = loss_lib.compute_l1_sphere_loss(
-        #   #   outputs['raw_image_features'],
-        #   #   depths_small[:, 1],
-        #   #   mask=torch.gt(depths_small[:, 1], 0.1))          
-        #   loss1 = depth_loss + 0.5 * loss_lib.compute_l1_sphere_loss(
-        #     outputs['raw_image_features_d1'],
-        #     depths_small[:, 1],
-        #     mask=torch.gt(depths_small[:, 1], 0.1))
         loss1 = depth_loss
       else:
         if args["out_type"]=="disparity":
@@ -558,34 +410,19 @@ class App:
               mask=torch.gt(depths_small[:, 1], 0.1))      
     else:
       raise ValueError("Loss not found: %s" % (args["loss"],))
-
-    # rot_loss = torch.mean(torch.abs(rots_pred _ rots[:, 0]))
-    # trans_loss = torch.mean(torch.abs(trans_pred _ trans[:, 0, :]))
-    final_loss = loss1 #
+    final_loss = loss1 
     depths_pred = torch.clamp(depths_pred, min=0.1)
 
     assert torch.isfinite(loss1).all(), "Nan in depth final_loss"
     assert torch.isfinite(final_loss).all(), "Nan in final_loss function"
 
     return {
-      # "error_flag":error_flag,
       "loss1": loss1,
       "final_loss": final_loss,
-      # "rot_loss": rot_loss,
-      # "trans_loss": trans_loss,
       "depths_pred": depths_pred,
       "panos_small": panos_small,
       "depths_small": depths_small,
       "outputs": outputs,
-      # "rect_gt_depth": rect_gt_depth,
-      # "rect_gt_disp": rect_gt_disp,
-      # "depth_smoothness_loss": depth_smoothness_loss,
-      # "disp_c1": disp_c1,
-      # "disp_c1_pred": disp_pred_c1,
-      # "depths_c1": depths_c1,
-      # "zdepths_small_1": zdepths_small_1,
-      # "rots_pred": rots_pred,
-      # "trans_pred": trans_pred
     }
 
   def do_validation_run(self, step):    
@@ -618,10 +455,6 @@ class App:
 
         writer.add_scalar("val_loss", final_loss.item(), step)
         writer.add_scalar("val_image_loss", run_outputs["loss1"].item(), step)
-        # writer.add_scalar("val_rot_loss", run_outputs["rot_loss"].item(), step)
-        # writer.add_scalar("val_trans_loss", run_outputs["trans_loss"].item(),
-                          # step)
-
         
         depths_turbo = my_torch_helpers.depth_to_turbo_colormap(
           depths_small[:, 1], min_depth=args["turbo_cmap_min"])
@@ -635,11 +468,6 @@ class App:
         depths_pred_turbo = my_torch_helpers.depth_to_turbo_colormap(
           normalized_depth_pred, min_depth=args["turbo_cmap_min"])
 
-        # back_warped_1 = model.backwards_warping(panos[:, 0],
-        #                                         depths_small[:, 1, :, :, 0],
-        #                                         run_outputs["rots_pred"],
-        #                                         run_outputs["trans_pred"],
-        #                                         inv_rot=False)
 
         depth_abs_error_img = torch.abs(depths_small[:, 1] -
                                         normalized_depth_pred)
@@ -685,14 +513,10 @@ class App:
     args = self.args
     model = self.model
     writer = self.writer
-
     depths_pred = run_outputs["depths_pred"]
     depths_small = run_outputs["depths_small"]
     outputs = run_outputs["outputs"]
-    # rect_gt_depth = run_outputs["rect_gt_depth"]
-    # rect_gt_disp = run_outputs["rect_gt_disp"]
     panos_small = run_outputs["panos_small"]
-
     final_loss = run_outputs["final_loss"]
     loss_np = final_loss.detach().cpu().numpy()
     average_depth_np = torch.mean(depths_pred).detach().cpu().numpy()
@@ -700,11 +524,6 @@ class App:
     writer.add_scalar("train_loss", loss_np, step)
     writer.add_scalar("train_depth", average_depth_np, step)
     writer.add_scalar("train_image_loss", run_outputs["loss1"].item(), step)
-    # writer.add_scalar("train_depth_smoothness_loss",
-    #                   run_outputs["depth_smoothness_loss"].item(), step)
-    # writer.add_scalar("train_rot_loss", run_outputs["rot_loss"].item(), step)
-    # writer.add_scalar("train_trans_loss", run_outputs["trans_loss"].item(),
-    #                   step)
 
     if step == 1 or \
         args["train_tensorboard_interval"] == 0 or \
@@ -792,21 +611,15 @@ class App:
 
         optimizer.zero_grad()
         step = checkpoint_manager.increment_step()
-        # if i%100==0:
         print("step:", step)      
         if step >= args["total_iter"]:
-          # print("evaluation...")
-          # self.do_validation_run(step)
           self.save_checkpoint(step)
           self.eval_on_validation_data(step)
-          # self.val_data.close()
           exit()
 
         if step % args["validation_interval"]==0 and step>0:
-          # self.do_validation_run(step)
           self.save_checkpoint(step)          
           self.eval_on_validation_data(step)
-          # self.val_data.close()
 
         if args["debug_mode"]:
           assert distro.linux_distribution()[0] == "Ubuntu", "Debug mode is on"
@@ -821,20 +634,9 @@ class App:
           rots = data["rots"].to(args["device"])
           trans = data["trans"].to(args["device"])
 
-        # print("panos", panos.dtype, depths.dtype, rots.dtype, trans.dtype)
-        # print("maxmin", torch.max(panos), torch.min(panos))
-
         run_outputs = self.run_depth_pose_carla(step, panos, depths,
                                                 rots,
                                                 trans)
-        # if run_outputs["error_flag"]:
-        #   #args["checkpoints_dir"]
-        #   data0 = run_outputs["i0"]
-        #   data1 = run_outputs["i1"]    
-        #   import cv2      
-        #   cv2.imwrite(args["checkpoints_dir"]+"/step_"+str(step)+"_0.jpg", data0)
-        #   cv2.imwrite(args["checkpoints_dir"]+"/step_"+str(step)+"_1.jpg", data1)
-        #   continue
         self.log_training_to_tensorboard(step, run_outputs)
 
         final_loss = run_outputs["final_loss"]
@@ -842,13 +644,9 @@ class App:
 
         final_loss.backward()
         if args["clip_grad_value"] > 1e-10:
-          # print("Clipping gradients to %f" % args["clip_grad_value"])
           torch.nn.utils.clip_grad_value_(model.parameters(),
                                           args["clip_grad_value"])
-
         optimizer.step()
-
-        # self.do_validation_run(step)
         self.save_checkpoint(step)
 
         if i%100==0:
@@ -1021,30 +819,20 @@ class App:
       mean_depth = 0
 
     with torch.no_grad():
-      # step = 100000
+      
       weight = (torch.arange(0, args["height"], device=args["device"],
                              dtype=torch.float32) + 0.5) * np.pi / args["height"]
       weight = torch.sin(weight).view(1, args["height"], 1, 1)
       def load_data(args, idx):
-        # np.savez(args["save_datadir"]+'/data_'+str(i)+'.npz', panos = panos.data.cpu().numpy(), rots=rots.data.cpu().numpy(), trans=trans.data.cpu().numpy(), depths=depths.data.cpu().numpy())
         data = np.load(args["save_datadir"]+'/data_'+str(idx)+'.npz')  
         return data
-
-
-    #todo
-      #args["checkpoints_dir"]
-      
       if step != -1:
         test_imgs_dir=os.path.join(args["checkpoints_dir"], "test_images_"+str(step)+"_"+str(args["m3d_dist"]))
       else:
         test_imgs_dir=os.path.join(args["checkpoints_dir"], "test_images"+"_"+str(args["m3d_dist"]))
-      # test_imgs_dir=os.path.join(args["checkpoints_dir"], "test_images")
       os.makedirs(test_imgs_dir, exist_ok=True)
-
-
       if args["load_prepared_test_data"]:
         print("load_prepared_test_data:")
-        #for mono depth: evaluation 1_th(not zero)
         for i in range(args["test_sample_num"]):
           print("evaluate i:", i)
           data = load_data(args, i)
@@ -1063,11 +851,6 @@ class App:
           depths_small = run_outputs["depths_small"][:, 1]
           depths_pred = run_outputs["depths_pred"][:, 0]
           depths_pred = torch.clamp_min(depths_pred, 0.0)
-          #visualize
-          
-          # test_imgs_dir
-          # import pdb;pdb.set_trace()
-          # print("panos.shape:", panos.shape)
           rgb = np.uint8(panos[:, 1][0].data.cpu().numpy()*255)
           cv2.imwrite(test_imgs_dir+"/"+str(i)+"_rgb.jpg", rgb)
 
@@ -1133,8 +916,6 @@ class App:
 
           depths_small = run_outputs["depths_small"][:, 1]
           if args["show_stats"]:
-            # if depths_small.max()> max_depth:
-              # max_depth = depths_small.max()
             max_depth_list.append(depths_small.max().data.cpu().numpy())
             mean_depth+= depths_small.mean()/max_examples
 
@@ -1150,18 +931,12 @@ class App:
               d_min = min(depth.min(), depth_gt.min())
               d_max = max(depth.max(), depth_gt.max())
               d_norm = np.uint8((depth-d_min)/(d_max-d_min)*255)
-              # import ipdb;ipdb.set_trace()
-
               d_rgb = cv2.applyColorMap(d_norm, cv2.COLORMAP_JET)
-
               d_gt_norm = np.uint8((depth_gt - d_min)/(d_max-d_min)*255)
               d_gt_rgb = cv2.applyColorMap(d_gt_norm, cv2.COLORMAP_JET)
               return d_rgb, d_gt_rgb
           np.savez(test_imgs_dir+"/"+str(i)+"_depths.npz", pred=d_pred, gt=d_gt)
-
           d_pred, d_gt = normalize_depth(d_pred, d_gt)
-          # d_gt = normalize_depth(d_gt)
-
           cv2.imwrite(test_imgs_dir+"/"+str(i)+"_depth_pred.jpg", d_pred)
           cv2.imwrite(test_imgs_dir+"/"+str(i)+"_depth_gt.jpg", d_gt)
           
@@ -1172,12 +947,10 @@ class App:
             pred_rgb = cv2.applyColorMap(s_pred_norm, cv2.COLORMAP_PINK)
             return pred_rgb
           if args["std_uncert_tune"]:
-            # import ipdb;ipdb.set_trace()
             sig_pred = run_outputs["outputs"]["mvs_std"][0, 0].data.cpu().numpy()
             sig_vis = normalize_sigma(sig_pred)
             cv2.imwrite(test_imgs_dir+"/"+str(i)+"_sigma.jpg", sig_vis)
           if args["uncert_tune"]:
-            # import ipdb;ipdb.set_trace()
             sig_pred = run_outputs["outputs"]["pred_final"][0, 1].data.cpu().numpy()
             sig_vis = normalize_sigma(sig_pred)
             cv2.imwrite(test_imgs_dir+"/"+str(i)+"_sigma.jpg", sig_vis)
@@ -1213,9 +986,7 @@ class App:
     results_file.close()
     if args["show_stats"]:
       print("mean_depth:", mean_depth)
-      # print("max_depth_list:", )
       max_depth = np.array(max_depth_list).max()
-      # max_depth_list = [ max_depth_list[idx] for idx in range(len(max_depth_list))]
       print("max_depth:", max_depth)
     print("Evaluation done")
     if args["use_lmdb"]:
@@ -1361,20 +1132,6 @@ class App:
           gt_zdepth, side=side))
     pred_zdepth_cube = torch.stack(pred_depth_cube, dim=1)
     gt_zdepth_cube = torch.stack(gt_depth_cube, dim=1)
-
-    # for i in range(pred_zdepth_cube.shape[1]):
-    #   my_torch_helpers.save_torch_image(
-    #     os.path.join(self.args["checkpoints_dir"], "depth_%d.png" % i),
-    #     my_torch_helpers.depth_to_turbo_colormap(
-    #       gt_zdepth_cube[:, i], min_depth=self.args["turbo_cmap_min"]
-    #     )
-    #   )
-    #   my_torch_helpers.save_torch_image(
-    #     os.path.join(self.args["checkpoints_dir"], "depth__%d.png" % i),
-    #     my_torch_helpers.depth_to_turbo_colormap(
-    #       pred_zdepth_cube[:, i], min_depth=self.args["turbo_cmap_min"]
-    #     )
-    #   )
 
     valid_regions = torch.logical_and(torch.gt(gt_zdepth_cube, 0.1),
                                       torch.lt(gt_zdepth_cube, args["max_depth"]))

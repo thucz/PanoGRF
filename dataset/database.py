@@ -10,22 +10,8 @@ import torch
 import cv2
 import numpy as np
 from skimage.io import imread, imsave
-
-from asset import LLFF_ROOT, nerf_syn_val_ids, NERF_SYN_ROOT
-# from colmap.read_write_dense import read_array
-# from colmap.read_write_model import read_cameras_binary, read_images_binary, read_points3d_binary
 from utils.base_utils import color_map_backward 
-
-# , resize_img, read_pickle, project_points, \
-    # save_pickle, transform_points_Rt, pose_inverse, downsample_gaussian_blur, 
 from PIL import Image
-
-# from utils.llff_utils import load_llff_data
-# from utils.real_estate_utils import parse_pose_file, unnormalize_intrinsics
-# from utils.space_dataset_utils import ReadScene
-
-# data_dir="/group/30042/ozhengchen/ft_local/neuray_data"
-
 class BaseDatabase(abc.ABC):
     def __init__(self, database_name):
         self.database_name = database_name

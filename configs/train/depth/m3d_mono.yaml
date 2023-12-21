@@ -1,11 +1,10 @@
 # UniFuse (monocular depth) pretrained model checkpoint 
-load_weights_dir: UniFuse-Unidirectional-Fusion/UniFuse
-
+load_weights_dir: /group/30042/ozhengchen/my_projects/unifuse_pretrained
 # training options(1000 for debug)
 validation_interval: 50000
 checkpoint_interval: 50000
 total_iter: 100000
-test_sample_num: 1000 # testing 1000 samples
+test_sample_num: 1000 # testing on 1000 samples
 
 # As monocular model is pretrained in 512x1024, we scale the input to that resolution.
 mono_height: 512
@@ -16,8 +15,7 @@ load_from_pretrained: True
 use_wrap_padding: true
 
 # finetuning on habitat matterport3d dataset, saving directory:
-checkpoints_dir: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/
-
+checkpoints_dir: /group/30042/ozhengchen/my_projects/logs/monodepth #checkpoint_100000.pt
 
 # using augmentation
 aug: True
