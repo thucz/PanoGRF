@@ -1,6 +1,8 @@
 #for debug:
-checkpoints_dir: "../logs_depth/m3d_mvs"
-DNET_ckpt: /group/30042/ozhengchen/ft_local/logs_depth/m3d_mono/checkpoint_100000.pt
+checkpoints_dir: "/group/30042/ozhengchen/ft_local/runs/run_m3d_erp_uniform_mono_stereo_wo_uncertainty_n5/" #checkpoint_100000.pt"
+
+DNET_ckpt: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/checkpoint_100000.pt
+
 test_sample_num: 1000 #
 total_iter: 100000
 train_tensorboard_interval: 1000

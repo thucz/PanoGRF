@@ -16,7 +16,8 @@ load_from_pretrained: True
 use_wrap_padding: true
 
 # finetuning on habitat matterport3d dataset, saving directory:
-checkpoints_dir: ../logs_depth/m3d_mono
+checkpoints_dir: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/
+
 
 # using augmentation
 aug: True
@@ -30,6 +31,7 @@ min_depth: 0.1
 max_depth: 10
 
 dataset: m3d
+
 # Indeed, the initial input is 512x256, consistent with 360-degree MVSNet. Later, we scale it to 512x1024 to feed into UniFuse.
 width: 512
 height: 256

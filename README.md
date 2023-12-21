@@ -43,6 +43,9 @@ The data for `opts.scene_dir` is organized as:
             |-- ...
     |-- ...
 ```
+## pretrained model
+The pretrained model of 360-degree Monocular Net, 360-degree MVSNet and general renderer(two-views trained under 1.0m camera baseline) can be found in [GoogleDrive](https://drive.google.com/drive/folders/14RTKIsmQVuBc-b_z8f2iCb0cjc6UdVBN?usp=sharing)
+
 ## Depth Training
 ### Monocular depth finetuning:
 Download the pretrained model on Matterport3D from [UniFuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) and put it under the directory `./UniFuse-Unidirectional-Fusion/UniFuse`.
