@@ -1,5 +1,9 @@
 # preprocess Replica
 
+You can get the data I have processed in [GoogleDrive](https://drive.google.com/file/d/1RU7EH8SuS0jVbRj-Y4I1KASauoMg5Rcs/view?usp=drive_link)
+
+
+
 
 ## download the original Replica Dataset
 Refer to the official [repo](https://github.com/facebookresearch/Replica-Dataset)
@@ -37,4 +41,6 @@ ${self.scenes_dir}
 ## preprocess
 run script to preprocess the original data to get 360-degree replica data.
 `bash main_wide.sh`
+
+
 
