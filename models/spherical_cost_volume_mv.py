@@ -164,28 +164,15 @@ def get_cv_per_depth(args, tmp_depth, xyz, batch_size, height, width, tmp_rot_re
     u = u / np.pi - 1 #[-1, 1]
     v = 2 * v / np.pi - 1  #[-1, 1]
   elif args["dataset_name"] == "residential":
-    # x_locs = ((1/(2.0*np.pi))*theta + (3/4.0))*(width-1)
-
-    # y_locs = (0.5 - phi/np.pi)*(height-1)
-    # import ipdb;ipdb.set_trace()
     u = torch.fmod(uv[..., 0] + 3/4.0*2*np.pi, 2*np.pi) #[0, 2pi]
     v = 0.5*np.pi - uv[..., 1]#[0, np.pi]
-    # print("v.max(), v.min():", v.max(), v.min())
-    # print("u.max(), u.min():", u.max(), u.min())
-    # import ipdb;ipdb.set_trace()
     u = u / np.pi - 1 #[-1, 1]
     v = 2 * v / np.pi - 1  #[-1, 1]
   elif args["dataset_name"] in ["CoffeeArea"]:
-    # x_locs = (width-1) * (1 - theta/(2.0*np.pi))
-    #         y_locs = phi*(height-1)/np.pi
     u = 2*np.pi - uv[..., 0] #[0, 2pi]
     v = uv[..., 1] #
-    # print("v.max(), v.min():", v.max(), v.min())
-    # print("u.max(), u.min():", u.max(), u.min())
-    # import ipdb;ipdb.set_trace()    
     u = u / np.pi - 1 #[-1, 1]
     v = 2 * v / np.pi - 1  #[-1, 1]    
-    # import ipdb;ipdb.set_trace()
   else:
     raise Exception
   assert torch.logical_and(torch.logical_and(u>=-1, u<=1), torch.logical_and(v>=-1, v<=1)).all(),"Wrong UV mapping, UV must be in [-1, 1]!"

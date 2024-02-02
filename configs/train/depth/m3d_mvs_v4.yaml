@@ -1,15 +1,9 @@
 
-# train MVS with monocular depth prior
+reference_idx: 4
+seq_len: 5 #4+1/ 8+1
+m3d_dist: 0.5
+checkpoints_dir: "/group/30042/ozhengchen/my_projects/logs/mvsdepth_v4/"
 
-# 360-MVS model saving directory:
-checkpoints_dir: "/group/30042/ozhengchen/my_projects/logs/mvsdepth/" #checkpoint_100000.pt"
-# 360 monocular depth model path:
-DNET_ckpt: /group/30042/ozhengchen/my_projects/logs/monodepth/checkpoint_100000.pt
-test_sample_num: 10 #
-total_iter: 100000
-train_tensorboard_interval: 1000
-validation_interval: 50000
-checkpoint_interval: 10000
 mono_height: 512
 mono_width: 1024
 debug: False
@@ -17,11 +11,13 @@ num_workers: 2
 load_weights_dir: /group/30042/ozhengchen/my_projects/unifuse_pretrained
 load_from_pretrained: True
 contain_dnet: true
+DNET_ckpt: /group/30042/ozhengchen/my_projects/logs/monodepth/checkpoint_100000.pt
 use_depth_sampling: True
 aug: True
 mono_uncertainty: false
 fixed_sigma: 0.5
 sphere: true
+
 mono_num_layers: 18
 mono_net: "UniFuse"
 mono_fusion: "cee"
@@ -40,12 +36,14 @@ min_depth: 0.1
 max_depth: 10
 dataset_name: "m3d"
 
-
-
+#debug these
+total_iter: 100000
+train_tensorboard_interval: 1000
+validation_interval: 50000
+checkpoint_interval: 10000
 script_mode: "train_depth_pose" #
-m3d_dist: 1.0
-reference_idx: 1
-seq_len: 2
+# eval_mode: test
+test_sample_num: 10
 
 # script_mode: "eval_depth_test" #
 # eval_mode: test

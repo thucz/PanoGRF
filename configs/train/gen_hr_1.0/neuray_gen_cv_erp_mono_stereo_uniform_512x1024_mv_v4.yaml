@@ -1,0 +1,150 @@
+
+test_views: [4, 5, 6, 7, 8, 9, 10, 11, 12] 
+seq_len: 13
+
+
+# neuray dirname:
+DNET_ckpt: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/checkpoint_100000.pt
+#TODO: revise it!
+
+# postfix+v4
+name: neuray_gen_erp_1.0_mono_stereo_uniform_512x1024_mv_v4_50000
+reference_idx: 4
+#debug
+total_cnt: 5000
+mvsnet_pretrained_path:  "/group/30042/ozhengchen/ft_local/runs/run_m3d_erp_uniform_mono_stereo_wo_uncertainty_n5_mv_v4/checkpoint_50000.pt" #"100000.pt"
+
+worker_num: 2
+#debug
+validate_num: 2
+total_step: 20000
+val_interval: 2000
+save_interval: 2000
+
+use_lmdb: true
+m3d_dist: 0.5
+# eval_only: true
+use_disp: true
+min_depth: 0.5
+max_depth: 15.0
+mvs_min_depth: 0.1
+mvs_max_depth: 10
+
+save_dir: "/group/30042/ozhengchen/lmdb"
+dataset_name: m3d
+
+batch_size: 1
+
+#iteration:
+
+lr_type: exp_decay
+lr_cfg:
+  lr_init: 4.0e-4
+  decay_step: 5000
+  decay_rate: 0.5
+
+#evaluation:
+height: 512
+width: 1024
+depth_height: 256
+depth_width: 512
+
+uncert_tune: false
+use_depth_sampling: true
+# DNET_ckpt: /group/30042/ozhengchen/ft_local/runs/run_m3d_depth_dnet_18_cee_ft_wrap_aug-final/checkpoint_100000.pt
+# eval_only: true #?
+contain_dnet: True
+fixed_sigma: 0.5
+
+#MVSNET:
+MAGNET_num_samples: 5
+MAGNET_sampling_range: 3
+MAGNET_mvs_weighting: "CW5"
+wo_hdh: false
+revise_range: false
+change_input: False
+
+# mvsnet_pretrained_path:  "/group/30042/ozhengchen/ft_local/runs/run_m3d_depth_erp-final/checkpoint_100000.pt"
+mvs_uncertainty: False
+wo_cv: false
+
+# monocular depth options
+mono_height: 512
+mono_width: 1024
+mono_uncertainty: false
+mono_num_layers: 18
+mono_net: "UniFuse"
+mono_fusion: "cee"
+# load from pretrain (UniFuse)
+load_weights_dir: UniFuse-Unidirectional-Fusion/UniFuse
+load_from_pretrained: True #False
+#dnet option
+imagenet_pretrained: false #true
+use_wrap_padding: true
+
+debug: false
+local_feature_type: "ERP" #, "ERP"
+init_net_feature_type: "ERP"
+#stereo net
+num_layers: 18
+net: "Equi" #depth
+fusion: "biproj"
+se_in_fusion: false
+fov: 80
+nrows: 4
+#mono+stereo:
+
+
+verbose: false
+depth_input_uv: true
+device: "cuda"
+stereo_out_type: "disparity"
+out_type: "depth"
+interpolation_mode: bilinear
+cost_volume: v3_erp
+model_use_v_input: false
+
+# network
+network: neuray_gen
+init_net_type: cost_volume
+use_hierarchical_sampling: true
+use_depth_loss: False
+
+dist_decoder_cfg:
+  use_vis: false
+fine_dist_decoder_cfg:
+  use_vis: false
+# fine_dist_decoder_cfg:
+#   use_vis: false
+ray_batch_num: 2048
+
+# loss
+loss: [render, depth]
+val_metric: [psnr_ssim, vis_img]
+key_metric_name: psnr_nr_fine
+use_dr_loss: false
+use_dr_fine_loss: false
+use_nr_fine_loss: true
+depth_correct_ratio: 1.0
+
+
+# lr
+
+
+# dataset
+train_dataset_type: gen
+resolution_type: hr
+# type2sample_weights: {m3d: 10}
+train_database_types: ['m3d']
+# aug_pixel_center_sample: true
+# ref_pad_interval: 32
+use_src_imgs: true
+
+val_set_list:
+  -
+    name: m3d
+    type: gen
+    cfg:
+      val_database_name: m3d
+      ref_pad_interval: 32
+      use_src_imgs: true

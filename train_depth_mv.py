@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
-from data_readers.carla_reader import CarlaReader
+# from data_readers.carla_reader import CarlaReader
 from data_readers.habitat_data_neuray_ft_mv import HabitatImageGeneratorFTMultiView
 from data_readers.habitat_data_neuray_ft_lmdb_mv import HabitatImageGeneratorFTMultiView_LMDB
 # from lmdb_rw.habitat_data_neuray_ft_lmdb import HabitatImageGeneratorFT_LMDB
@@ -25,7 +25,7 @@ import random
 import argparse
 
 from utils.base_utils import load_cfg
-from seed import setup_seed, seed_everything
+from utils.seed import setup_seed, seed_everything
 
     
 class App:
@@ -213,27 +213,13 @@ class App:
                          use_v_input=args["model_use_v_input"],
                          ).to(args["device"])
     if args["uncert_tune"]:
-      # load_mvs_model(self.mvs_net, args["mvs_checkpoints_dir"])
-    
-      # for param in self.mvs_net.parameters():
-      #   param.requires_grad = False
-      # self.mvs_net.eval()
+      
       from network.omni_mvsnet.uncert_wrapper import UncertWrapper
       model = UncertWrapper(args, model)
     
     if args["std_uncert_tune"]:
-      # load_mvs_model(self.mvs_net, args["mvs_checkpoints_dir"])
-    
-      # for param in self.mvs_net.parameters():
-      #   param.requires_grad = False
-      # self.mvs_net.eval()
       from network.omni_mvsnet.std_uncert_wrapper import StdUncertWrapper
       model = StdUncertWrapper(args, model)
-    
-    
-    # else:
-    #   # net = Uncertainty_Wrapper(args, model, )
-
 
     optimizer = torch.optim.Adam(model.parameters(),
                                  lr=args["learning_rate"],

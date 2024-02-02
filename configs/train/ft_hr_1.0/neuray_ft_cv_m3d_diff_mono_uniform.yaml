@@ -1,0 +1,121 @@
+#lr_init: 4e-4->1e-4
+min_depth: 0.5
+max_depth: 15
+use_lmdb: true
+save_dir: "/group/30042/ozhengchen/lmdb"
+total_cnt: 20000
+data_idx: 1
+name: neuray_ft_m3d_diff_mono_uniform_hr
+has_depth: true
+# neuray_gen_cv_erp_mono_stereo_uniform_512x1024_uncert
+gen_cfg: configs/train/gen_hr_1.0/neuray_gen_cv_erp_mono_stereo_uniform_512x1024.yaml
+
+
+# gen_cfg: configs/train/gen_1.0/neuray_gen_cv_train_erp_with_depth.yaml
+# mvsnet_pretrained_path:  "/group/30042/ozhengchen/ft_local/runs/run_m3d_depth_erp/checkpoint_100000.pt"
+
+
+uncert_tune: false
+ft_include_self: true
+include_self_prob: 0.01
+
+
+debug: false
+worker_num: 0
+
+# mvs_min_depth: 0.1
+# mvs_max_depth: 10
+
+# # mono_max_depth: 10
+
+
+#pano
+m3d_dist: 0.5
+height: 512
+width: 1024
+depth_height: 256
+depth_width: 512
+
+seq_len: 3
+reference_idx: 1
+dataset_name: m3d
+batch_size: 1
+
+local_feature_type: "ERP" #, "ERP"
+init_net_feature_type: "ERP"
+
+contain_dnet: false
+net: "Equi"
+verbose: false
+depth_input_uv: true
+device: "cuda"
+stereo_out_type: "disparity"
+out_type: "depth"
+
+imagenet_pretrained: True
+interpolation_mode: bilinear,
+cost_volume: v3_erp
+model_use_v_input: false
+use_wrap_padding: true
+
+# network
+network: neuray_ft
+use_hierarchical_sampling: true
+
+dist_decoder_cfg:
+  use_vis: false
+fine_dist_decoder_cfg:
+  use_vis: false
+
+# gen_cfg: configs/gen/neuray_gen_cost_volume.yaml
+
+database_name: m3d
+database_split: val_all
+
+train_ray_num: 512
+use_self_hit_prob: false #errorous
+
+validate_initialization: true
+
+# loss
+loss: [render] #depth_ft_uncert
+depth_ft_lambda: 0.1
+depth_ft_uncert_lambda: 0.01
+perpoint_loss_lambda: 0.1
+render_depth: False
+render_uncert: False
+perpoint_loss: False
+
+
+
+val_metric: [psnr_ssim, vis_img]
+key_metric_name: psnr_nr_fine
+use_nr_fine_loss: true
+
+# lr
+val_interval: 1000
+save_interval: 1000
+total_step: 10000
+# val_interval: 10
+# save_interval: 10
+# total_step: 20
+
+lr_cfg:
+  lr_init: 1.0e-4
+  decay_step: 10000
+  decay_rate: 0.5
+
+# dataset
+train_dataset_type: ft
+
+train_dataset_cfg:
+  database_name: m3d
+  database_split: val_all
+
+val_set_list:
+  -
+    name: m3d
+    type: ft
+    cfg:
+      database_name: m3d
+      database_split: val_all

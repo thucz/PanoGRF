@@ -80,13 +80,13 @@ bash train_scripts/gen_hr_1.0/gen_mono_stereo_uniform_512x1024.sh
 ```
 bash render_scripts/gen_hr_1.0/gen_eval_m3d.sh
 ```
-<!-- ## Todo List
-
+## Todo List
+- [ ] multi-view training
+- [ ] fine-tune training
 - [ ] Dataset: Replica
 - [ ] Dataset: Residential
-- [ ] multi-view training & evaluation code
 - [ ] code explanation & clean up unnessary codes
-- [ ] ...... -->
+- [ ] ......
 
 ## Acknowledgements
 Within this repository, I have utilized code and datasets from various sources. I express my gratitude to all the authors who have generously shared their valuable resources, enabling me to build upon their work:
