@@ -2,7 +2,7 @@
 Residential has 3 scenes.
 
 # download 
-get the files from the link given by [SOMSI] (https://drive.google.com/drive/folders/16gtKsBxyj6Uq-PWKe1QD2Xp9qID-Kr7n)
+get the files from the link given by [SOMSI](https://drive.google.com/drive/folders/16gtKsBxyj6Uq-PWKe1QD2Xp9qID-Kr7n)
 
 ```
 bash residential_handle.sh
