@@ -88,7 +88,7 @@ bash render_scripts/gen_hr_1.0/gen_eval_m3d.sh
 - [ ] fine-tune training
 - [x] Dataset: Replica
 - [x] Dataset: Residential
-- [ ] code explanation & clean up unnessary codes
+- [ ] clean up unnessary codes
 - [ ] ......
 
 ## Acknowledgements
