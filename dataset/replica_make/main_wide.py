@@ -19,7 +19,6 @@ import cv2
 from habitat.datasets import make_dataset
 import random
 import torch.nn.functional as F
-from pfm_rw import write_pfm
 
 from data_readers.mhabitat import vector_env
 from helpers import my_helpers
