@@ -44,3 +44,6 @@ run script to preprocess the original data to get 360-degree replica data.
 
 
 
+# Acknowledgements
+The code is supported by the author of [SOMSI](https://github.com/tedyhabtegebrial/SoftOcclusionMSI) and [OmniSyn](https://github.com/AugmentariumLab/omnisyn).
+
