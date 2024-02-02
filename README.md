@@ -86,8 +86,8 @@ bash render_scripts/gen_hr_1.0/gen_eval_m3d.sh
 ## Todo List
 - [ ] multi-view training
 - [ ] fine-tune training
-- [ ] Dataset: Replica
-- [ ] Dataset: Residential
+- [x] Dataset: Replica
+- [x] Dataset: Residential
 - [ ] code explanation & clean up unnessary codes
 - [ ] ......
 
