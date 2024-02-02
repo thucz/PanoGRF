@@ -17,3 +17,8 @@ bash residential_handle.sh
 `pose_out_path`: the path to save the processed poses
 
 `scene_dir`: the path to save all the data preparing for PanoGRF.
+
+
+# Acknowledgements
+The code is supported by the author of [SOMSI](https://github.com/tedyhabtegebrial/SoftOcclusionMSI).
+
