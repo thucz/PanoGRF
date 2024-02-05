@@ -1,0 +1,222 @@
+absl-py==1.3.0
+addict==2.4.0
+aiohttp==3.8.4
+aiosignal==1.3.1
+antlr4-python3-runtime==4.9.3
+astunparse==1.6.3
+async-timeout==4.0.2
+asynctest==0.13.0
+attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1659291887007/work
+backcall==0.2.0
+billiard==4.0.2
+blessed==1.19.1
+braceexpand==0.1.7
+brotlipy==0.7.0
+cachetools==5.2.0
+certifi==2022.9.24
+cffi @ file:///tmp/abs_98z5h56wf8/croots/recipe/cffi_1659598650955/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+click==8.1.3
+cloudpickle==2.2.0
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
+ConfigArgParse==1.5.3
+cos-python-sdk-v5==1.9.21
+crcmod==1.7
+cryptography @ file:///tmp/build/80754af9/cryptography_1652083456434/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1635519461629/work
+Cython==0.29.33
+dash==2.7.0
+dash-core-components==2.0.0
+dash-html-components==2.0.0
+dash-table==5.0.0
+dataclasses==0.6
+debugpy==1.6.3
+decorator==4.4.2
+distro==1.8.0
+dulwich==0.21.3
+easydict==1.10
+einops==0.6.0
+entrypoints==0.4
+faster-fifo==1.4.2
+fastjsonschema==2.16.2
+filelock==3.9.0
+Flask==2.2.2
+flatbuffers==22.9.24
+fonttools==4.37.4
+frozenlist==1.3.3
+fsspec==2023.1.0
+future==0.18.2
+fuzzywuzzy==0.18.0
+gast==0.4.0
+gdrive==0.1.5
+Geometry==0.0.23
+gitdb @ file:///home/conda/feedstock_root/build_artifacts/gitdb_1635085722655/work
+GitPython @ file:///home/conda/feedstock_root/build_artifacts/gitpython_1665480281556/work
+google-api-core==2.10.2
+google-api-python-client==2.43.0
+google-auth==2.13.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.4.6
+google-pasta==0.2.0
+googleapis-common-protos==1.56.4
+gpustat==1.0.0
+grpcio==1.50.0
+gym==0.23.0
+gym-notices==0.0.8
+h5py==3.7.0
+-e git+https://github.com/facebookresearch/habitat-lab.git@0f454f62e41050bc90ca468c62db35d7484923ff#egg=habitat
+-e git+https://github.com/facebookresearch/habitat-lab.git@afe4058a7f8aa5ab71a133575cdaa79f0308af6a#egg=habitat_lab&subdirectory=habitat-lab
+habitat-sim==0.2.2
+httplib2==0.21.0
+huggingface-hub==0.11.1
+hydra-core==1.3.1
+idna @ file:///croot/idna_1666125576474/work
+ifcfg==0.23
+imageio==2.22.3
+imageio-ffmpeg @ file:///home/conda/feedstock_root/build_artifacts/imageio-ffmpeg_1649960641006/work
+importlib-metadata==5.0.0
+importlib-resources==5.10.0
+inplace-abn==1.1.0
+ipdb==0.13.9
+ipykernel==6.16.2
+ipython==7.34.0
+ipywidgets==8.0.2
+itsdangerous==2.1.2
+jedi==0.18.1
+jeepney==0.8.0
+Jinja2==3.1.2
+joblib==1.2.0
+jsonschema==4.17.1
+jupyter_client==7.4.7
+jupyter_core==4.11.2
+jupyterlab-widgets==3.0.3
+keras==2.10.0
+Keras-Preprocessing==1.1.2
+kiwisolver==1.4.4
+kornia==0.5.8
+libclang==14.0.6
+lightning-utilities==0.8.0
+llvmlite==0.39.1
+lmdb==1.2.0
+lpips==0.1.4
+magnum @ file:///opt/conda/envs/py37/conda-bld/habitat-sim_1655316709858/work/build/deps/magnum-bindings/src/python
+Markdown==3.4.1
+markdown-it-py==2.1.0
+MarkupSafe==2.1.1
+matplotlib==3.5.3
+matplotlib-inline==0.1.6
+mdurl==0.1.2
+mkl-fft==1.3.1
+mkl-random @ file:///tmp/build/80754af9/mkl_random_1626179032232/work
+mkl-service==2.4.0
+mmcls==0.25.0
+mmcv==1.7.0
+mmsegmentation==0.29.1
+moviepy==2.0.0.dev2
+msgpack==1.0.4
+multidict==6.0.4
+nbformat==5.5.0
+nest-asyncio==1.5.6
+networkx==2.6.3
+numba==0.56.3
+numpy @ file:///opt/conda/conda-bld/numpy_and_numpy_base_1653915516269/work
+numpy-quaternion==2022.4.2
+nvidia-ml-py==11.495.46
+oauthlib==3.2.2
+objectio==0.2.29
+omegaconf==2.3.0
+open3d==0.16.0
+opencv-contrib-python==4.6.0.66
+opencv-python==4.6.0.66
+opt-einsum==3.3.0
+packaging==21.3
+pandas==1.3.5
+parso==0.8.3
+pexpect==4.8.0
+pickle5==0.0.12
+pickleshare==0.7.5
+Pillow==9.2.0
+pkgutil_resolve_name==1.3.10
+plotly==5.11.0
+plyfile==0.7.4
+prettytable==3.5.0
+proglog==0.1.10
+progress==1.6
+prompt-toolkit==3.0.31
+protobuf==3.20.1
+psutil==5.9.4
+ptyprocess==0.7.0
+pyasn1==0.4.8
+pyasn1-modules==0.2.8
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pycryptodome==3.16.0
+pydantic==1.10.5
+pyglet==1.5.27
+Pygments==2.14.0
+pynvml==11.5.0
+pyOpenSSL @ file:///opt/conda/conda-bld/pyopenssl_1643788558760/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1652235407899/work
+pyproj==3.2.1
+pyquaternion==0.9.9
+pyrsistent==0.19.2
+PySocks @ file:///tmp/build/80754af9/pysocks_1594394576006/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+pytorch-lightning==1.9.4
+pytz==2022.6
+PyWavelets==1.3.0
+PyYAML==6.0
+pyzmq==24.0.1
+Quaternion==3.5.2.post4
+requests @ file:///opt/conda/conda-bld/requests_1657734628632/work
+requests-oauthlib==1.3.1
+rich==13.3.1
+rsa==4.9
+scikit-image==0.19.2
+scikit-learn==1.0.2
+scipy @ file:///tmp/build/80754af9/scipy_1641536880743/work
+SecretStorage==3.3.3
+simplejson==3.17.6
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+smmap @ file:///home/conda/feedstock_root/build_artifacts/smmap_1611376390914/work
+tenacity==8.1.0
+tensorboard==2.8.0
+tensorboard-data-server==0.6.1
+tensorboard-plugin-wit==1.8.1
+tensorboardX==2.5.1
+tensorflow==2.10.0
+tensorflow-estimator==2.10.0
+tensorflow-io-gcs-filesystem==0.27.0
+termcolor==2.0.1
+thop==0.1.1.post2209072238
+threadpoolctl==3.1.0
+tifffile==2021.11.2
+timm==0.6.12
+toml==0.10.2
+torch==1.10.1+cu111
+torchaudio==0.10.1+cu111
+torchmetrics==0.11.4
+torchvision==0.11.2+cu111
+tornado==6.2
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1662214488106/work
+traitlets==5.5.0
+transforms3d==0.4.1
+typer==0.6.1
+typing_extensions @ file:///tmp/abs_ben9emwtky/croots/recipe/typing_extensions_1659638822008/work
+uritemplate==4.1.1
+urllib3 @ file:///croot/urllib3_1666298941550/work
+urwid==2.1.2
+venus-api-base==1.1.9
+venus-boot==1.1.9
+venus-ml==1.1.9
+venus-tools==1.1.9
+versioneer==0.28
+wcwidth==0.2.5
+webdataset==0.1.40
+Werkzeug==2.2.2
+widgetsnbextension==4.0.3
+wrapt==1.14.1
+xmltodict==0.13.0
+yacs==0.1.8
+yapf==0.32.0
+yarl==1.8.2
+zipp==3.9.0
