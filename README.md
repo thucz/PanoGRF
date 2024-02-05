@@ -30,6 +30,8 @@ We download Matterport3D following [SynSin](https://github.com/facebookresearch/
 
 Please fill and sign the [Terms of Use](https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf) agreement form and send it to matterport3d@googlegroups.com to request access to the dataset.
 
+The offical download script (`download_mp.py`) will be given in the reply email after your request is approved.
+
 The full MP3D dataset for use with Habitat can be downloaded using the official [Matterport3D](https://niessner.github.io/Matterport/) download script as follows: python download_mp.py --task habitat -o path/to/download/. Note that this download script requires python 2.7 to run.
 
 
