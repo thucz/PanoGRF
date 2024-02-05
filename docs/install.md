@@ -37,3 +37,15 @@ conda install habitat-sim=0.2.2 headless -c conda-forge -c aihabitat -y
 ```
 This step takes a long time for me.
 
+
+
+# Others
+if your habitat environment cannot work, you may check your environment via `requirements_freeze.txt`
+
+```
+...
+-e git+https://github.com/facebookresearch/habitat-lab.git@0f454f62e41050bc90ca468c62db35d7484923ff#egg=habitat
+-e git+https://github.com/facebookresearch/habitat-lab.git@afe4058a7f8aa5ab71a133575cdaa79f0308af6a#egg=habitat_lab&subdirectory=habitat-lab
+habitat-sim==0.2.2
+...
+```
