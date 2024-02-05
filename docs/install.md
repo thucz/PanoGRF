@@ -16,7 +16,7 @@ pip install -r requirements.txt
 # EGL+OpenGL
 Make sure you have installed EGL + OpenGL in your environment. Check out by [egl-example](https://github.com/erwincoumans/egl_example).
 
-If you haven't installed egl, egl installation procedure from docker file is like [this](./docs/egl_dockerfile).
+If you haven't installed egl, egl installation procedure from docker file is like [this](./egl_dockerfile).
 
 # Habitat
 <!-- pip install protobuf==3.20.1 proglog decorator msgpack simplejson click distro progress billiard einops kornia -->
