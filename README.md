@@ -21,9 +21,19 @@ If you find this repo useful, please give me a star and cite this paper:
 ## Environment
 Refer to [installation guidance](./docs/install.md)
 
-## Dataset
+
+
+## Dataset 
+
+#### Download
 We download Matterport3D following [SynSin](https://github.com/facebookresearch/synsin/blob/main/MP3D.md).
 
+Please fill and sign the [Terms of Use](https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf) agreement form and send it to matterport3d@googlegroups.com to request access to the dataset.
+
+The full MP3D dataset for use with Habitat can be downloaded using the official [Matterport3D](https://niessner.github.io/Matterport/) download script as follows: python download_mp.py --task habitat -o path/to/download/. Note that this download script requires python 2.7 to run.
+
+
+#### Dataset Path Configuration
 You should change the name of all the saving directories in the config files according to your directories.
 
 You should also revise the data directory `opts.scenes_dir` according to your download directory which stored `mp3d` in the following files:
