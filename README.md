@@ -91,12 +91,14 @@ This step takes too much storage space. If the saved data is too large for you, 
 ```
 bash train_scripts/gen_hr_1.0/gen_mono_stereo_uniform_512x1024.sh
 ```
-## render & eval with pretrained models:
+## render & eval with pretrained models ([GoogleDrive](https://drive.google.com/drive/folders/14RTKIsmQVuBc-b_z8f2iCb0cjc6UdVBN?usp=sharing)):
 In configuration file `configs/train/gen_hr_1.0/neuray_gen_cv_erp_mono_stereo_uniform_512x1024.yaml`,
-you need to revise `DNET_ckpt` to pretrained monocular depth model path: `habitat_monodepth/checkpoint_100000.pt`
-`mvsnet_pretrained_path` to pretrained MVS depth model path `habitat_mvs/checkpoint_100000.pt``
+you need to
+- revise `DNET_ckpt` -> pretrained monocular depth model path `habitat_monodepth/checkpoint_100000.pt`
 
-run `mkdir -p data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`,put pretrained renderer model `general_renderer/model.pth` into `data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`
+- revise `mvsnet_pretrained_path` -> pretrained MVS depth model path `habitat_mvs/checkpoint_100000.pt``
+
+- run `mkdir -p data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`, put pretrained renderer model `general_renderer/model.pth` into `data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`
 
 Then run the following command to get renderer results.
 ```
