@@ -94,6 +94,7 @@ bash train_scripts/gen_hr_1.0/gen_mono_stereo_uniform_512x1024.sh
 ## render & eval with pretrained models ([GoogleDrive](https://drive.google.com/drive/folders/14RTKIsmQVuBc-b_z8f2iCb0cjc6UdVBN?usp=sharing)):
 In configuration file `configs/train/gen_hr_1.0/neuray_gen_cv_erp_mono_stereo_uniform_512x1024.yaml`,
 you need to
+- ensure `save_dir` is the precessed data directory (lmdb format) 
 - revise `DNET_ckpt` -> pretrained monocular depth model path `habitat_monodepth/checkpoint_100000.pt`
 
 - revise `mvsnet_pretrained_path` -> pretrained MVS depth model path `habitat_mvs/checkpoint_100000.pt`

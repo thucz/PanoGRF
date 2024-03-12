@@ -11,11 +11,7 @@ class ResidentialDataset(torch.utils.data.Dataset):
             train_views = [0, 8] #[3,5]
             val_view = [4]
             all_views = sorted(train_views+val_view)
-            # import ipdb;ipdb.set_trace()
-            # rgb_panos = data["rgbs"][all_views]
-            # cube_rgbs = data["cube_rgbs"][all_views]
-            # c2w = data["c2w"][all_views]
-            # cube_c2w = data['cube_c2w'][all_views]
+            
             self.data ={
                 "rgbs": data["rgbs"][all_views],
                 "cube_rgbs": data["cube_rgbs"][all_views],
