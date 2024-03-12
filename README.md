@@ -96,7 +96,7 @@ In configuration file `configs/train/gen_hr_1.0/neuray_gen_cv_erp_mono_stereo_un
 you need to
 - revise `DNET_ckpt` -> pretrained monocular depth model path `habitat_monodepth/checkpoint_100000.pt`
 
-- revise `mvsnet_pretrained_path` -> pretrained MVS depth model path `habitat_mvs/checkpoint_100000.pt``
+- revise `mvsnet_pretrained_path` -> pretrained MVS depth model path `habitat_mvs/checkpoint_100000.pt`
 
 - run `mkdir -p data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`, put pretrained renderer model `general_renderer/model.pth` into `data/neuray_gen_erp_1.0_mono_stereo_uniform_512x1024`
 
