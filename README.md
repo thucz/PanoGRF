@@ -1,6 +1,6 @@
 # PanoGRF
 
-This is the unofficial code release for our NeurIPS2023 paper, PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas
+This is the unofficial code release for NeurIPS2023 paper, PanoGRF: Generalizable Spherical Radiance Fields for Wide-baseline Panoramas
 ## [Project Page](https://thucz.github.io/PanoGRF/)|[Arxiv](https://arxiv.org/abs/2306.01531)
 
 ## Update:
