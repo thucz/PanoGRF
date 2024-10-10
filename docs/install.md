@@ -37,7 +37,13 @@ conda install habitat-sim=0.2.2 headless -c conda-forge -c aihabitat -y
 ```
 This step takes a long time for me.
 
+or install from local file.
 
+```
+# download `habitat-sim-0.2.2-py3.7_headless_bullet_linux_011191f65f37587f5a5452a93d840b5684593a00.tar.bz2` from `https://anaconda.org/aihabitat/habitat-sim/files`
+
+conda install --use-local habitat-sim-0.2.2-py3.7_headless_bullet_linux_011191f65f37587f5a5452a93d840b5684593a00.tar.bz2
+```
 
 # Others
 if your habitat environment cannot work, you may check your environment via `requirements_freeze.txt`
